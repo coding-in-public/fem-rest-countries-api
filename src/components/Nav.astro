@@ -1,0 +1,49 @@
+---
+import Icon from "astro-icon";
+---
+
+<nav
+  class="bg-theme-elements shadow shadow-theme-input dark:shadow-slate-900/40"
+  transition:persist
+>
+  <div class="container flex items-center justify-between py-4">
+    <h1 class="font-bold text-2xl">
+      <a href="/">Where in the world?</a>
+    </h1>
+    <button class="flex items-center gap-2" id="theme-switch">
+      <Icon name="fe:moon" width="24" class="hidden dark:block" />
+      <Icon name="fe:sunny-o" width="24" class="dark:hidden" />
+      <span class="dark:hidden">Dark Mode</span>
+      <span class="hidden dark:block">Light Mode</span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  const themeBtn = document.querySelector("#theme-switch");
+
+  themeBtn?.addEventListener("click", (e) => {
+    const currentVal = localStorage.getItem("theme");
+
+    const currentDefault = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
+
+    // dark mode
+
+    if (currentVal) {
+      document.documentElement.setAttribute(
+        "data-theme",
+        currentVal === "light" ? "dark" : "light"
+      );
+    }
+
+    if (currentDefault) {
+      document.documentElement.setAttribute(
+        "data-theme",
+        currentVal === "light" ? "dark" : "light"
+      );
+    }
+  });
+</script>
